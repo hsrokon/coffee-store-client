@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const UpdateCoffee = () => {
 
@@ -28,15 +29,34 @@ const UpdateCoffee = () => {
             photo
         }
 
-        fetch(`http://localhost:5000/coffee/${coffee._id}`, {
-            method: 'PUT',
-            headers: {'content-type' : 'application/json'},
-            body: JSON.stringify(updatedCoffee)
-        })
-        .then(res=>res.json())
-        .then(data=> {
-            console.log(data);
-        })
+        Swal.fire({
+                title: "Do you update?",
+                text: "You can update anytime again!",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, update it!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  fetch(`http://localhost:5000/coffee/${coffee._id}`, {
+                        method: 'PUT',
+                        headers: {'content-type' : 'application/json'},
+                        body: JSON.stringify(updatedCoffee)
+                    })
+                  .then(res => res.json())
+                  .then(data => {
+                    console.log(data);
+                    if (data.modifiedCount>0) {
+                      Swal.fire({
+                        title: "Updated!",
+                        text: "Your file has been updated.",
+                        icon: "success"
+                      });
+                    }
+                  })
+                }
+              });
     }
 
     return (
