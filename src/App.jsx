@@ -1,13 +1,51 @@
 import { Link, useLoaderData } from 'react-router-dom'
 import './App.css'
+import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 function App() {
 
-  const coffee = useLoaderData();
+  const loadedCoffee = useLoaderData();
+  const [coffee, setCoffee] = useState(loadedCoffee)
+
+  const handleDelete = id => {
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:5000/coffee/${id}`, {
+            method: 'DELETE'
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            if (data.deletedCount>0) {
+              const remainingCoffee = loadedCoffee.filter(cof => cof._id !==id)
+              setCoffee(remainingCoffee);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          })
+        }
+      });
+  }
 
   return (
     <>
-      <h1 className='my-10 text-center text-4xl'>Coffee Store {coffee.length}</h1>
+      <h1 className='my-10 text-center text-4xl'>Coffee Store. Total coffee: {coffee.length}</h1>
+      <div className='flex justify-center my-4'>
+        <Link to={'/addCoffee'} className='btn border border-white'>Add a coffee</Link>
+      </div>
       <div className='grid grid-cols-3 gap-4 w-11/12 mx-auto'>
         {
           coffee.map(cof => <div key={cof._id}>
@@ -27,7 +65,7 @@ function App() {
                   <div className="join flex gap-2">
                     <Link to={`/coffee/${cof._id}`} className="btn join-item border border-white">View</Link>
                     <button className="btn join-item border border-white">Edit</button>
-                    <button className="btn join-item border border-white">Delete</button>
+                    <button className="btn join-item border border-white bg-red-400" onClick={()=>handleDelete(cof._id)}>Delete</button>
                   </div>
                 </div>
                 <div className="card-actions justify-end">
