@@ -9,17 +9,17 @@ const AddCoffee = () => {
         const name = form.name.value;
         const chef = form.chef.value;
         const supplier = form.supplier.value;
-        const test = form.test.value;
+        const taste = form.taste.value;
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
-        console.log(name,chef,supplier,test,category,details,photo);
+        console.log(name,chef,supplier,taste,category,details,photo);
 
         const coffee = {
             name,
             chef,
             supplier,
-            test,
+            taste,
             category,
             details,
             photo
@@ -66,8 +66,8 @@ const AddCoffee = () => {
                         <input type="text" className="input w-full" name='supplier' placeholder="Supplier"/>
                     </fieldset>
                     <fieldset className="fieldset w-1/2">
-                        <legend className="fieldset-legend">Test</legend>
-                        <input type="text" className="input w-full" name='test' placeholder="Test" />
+                        <legend className="fieldset-legend">Taste</legend>
+                        <input type="text" className="input w-full" name='taste' placeholder="Taste" />
                     </fieldset>
                 </div>
                 {/* form row */}

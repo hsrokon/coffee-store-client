@@ -64,7 +64,7 @@ function App() {
                 <div className='w-auto mx-auto my-2'>
                   <div className="join flex gap-2">
                     <Link to={`/coffee/${cof._id}`} className="btn join-item border border-white">View</Link>
-                    <button className="btn join-item border border-white">Edit</button>
+                    <Link to={`/updateCoffee/${cof._id}`} className="btn join-item border border-white">Edit</Link>
                     <button className="btn join-item border border-white bg-red-400" onClick={()=>handleDelete(cof._id)}>Delete</button>
                   </div>
                 </div>
