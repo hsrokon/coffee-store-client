@@ -26,8 +26,8 @@ const SignUp = () => {
             setUser(user)
             console.log(credential);
             
-            
-            const newUser = {name, email}
+            const createdAt = user.metadata.creationTime;
+            const newUser = {name, email, createdAt}
             fetch('http://localhost:5000/users', {
                 method: 'POST',
                 headers: {'content-type' : 'application/json'},
@@ -36,6 +36,9 @@ const SignUp = () => {
             .then(res=> res.json())
             .then(data => {
                 console.log('User created to db',data)
+                if (data.insertedId) {
+                    alert('User saved to DB')
+                }
             })
 
             // updateUserProfile(displayName, photoURL)
