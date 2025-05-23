@@ -14,7 +14,7 @@ const SignUp = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        // const displayName = e.target.name.value;
+        const name = e.target.name.value;
         // const photoURL = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.pass.value;
@@ -24,6 +24,20 @@ const SignUp = () => {
         .then(credential =>{
             const user = credential.user;
             setUser(user)
+            console.log(credential);
+            
+            
+            const newUser = {name, email}
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {'content-type' : 'application/json'},
+                body: JSON.stringify(newUser)
+            })
+            .then(res=> res.json())
+            .then(data => {
+                console.log('User created to db',data)
+            })
+
             // updateUserProfile(displayName, photoURL)
             // .then()
             // .catch(error => {
@@ -51,14 +65,14 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit} className="card-body">
                         <fieldset className="fieldset gap-0.5 md:gap-1.5">
 
-                        {/* <label className="text-sm">Name</label>
+                        <label className="text-sm">Name</label>
                         <input 
                         type="text" 
                         name="name"
                         className="input rounded-2xl text-base-content" 
                         placeholder="Name" />
 
-                        <label className="text-sm">Photo URL</label>
+                        {/* <label className="text-sm">Photo URL</label>
                         <input 
                         type="text" 
                         name="photo"
