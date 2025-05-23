@@ -45,6 +45,8 @@ function App() {
       <h1 className='my-10 text-center text-4xl'>Coffee Store. Total coffee: {coffee.length}</h1>
       <div className='flex justify-center my-4'>
         <Link to={'/addCoffee'} className='btn border border-white'>Add a coffee</Link>
+        <Link to={'/signup'} className='btn border border-white'>SignUP</Link>
+        <Link to={'/login'} className='btn border border-white'>Login</Link>
       </div>
       <div className='grid grid-cols-3 gap-4 w-11/12 mx-auto'>
         {
