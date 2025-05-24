@@ -25,7 +25,7 @@ const AddCoffee = () => {
             photo
         }
 
-        fetch('http://localhost:5000/coffee', {
+        fetch('https://coffe-store-server-smoky.vercel.app/coffee', {
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'

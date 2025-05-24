@@ -20,7 +20,7 @@ function App() {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/coffee/${id}`, {
+          fetch(`https://coffe-store-server-smoky.vercel.app/coffee/${id}`, {
             method: 'DELETE'
           })
           .then(res => res.json())
