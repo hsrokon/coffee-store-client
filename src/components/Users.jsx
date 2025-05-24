@@ -54,6 +54,7 @@ const Users = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Created time</th>
+                        <th>Last login</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -66,6 +67,7 @@ const Users = () => {
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>{user?.createdAt}</td>
+                        <td>{user?.lastSignInTime}</td>
                         <td className='flex gap-2 text-2xl'>
                         <FaEdit className='cursor-pointer'/> 
                         <MdDeleteForever className='cursor-pointer' onClick={()=> handleDelete(user._id)}/></td>
